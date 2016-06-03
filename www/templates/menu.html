@@ -2,33 +2,21 @@
     <ion-content padding="true" class="has-header">
       <ion-list>
 
-       <ion-item class = "item item-input item-select " ng-repeat="item in menu">
-      <div class = "input-label">
-         {{item.name}}
-      </div>
-      <div class = "input-label">
-         {{item.price | currency}}
-      </div>
+       <ion-item class = "item item-input item-select " ng-repeat="item in order">
+          <div class = "input-label">
+            {{item.name}}
+          </div>
+          <div class = "input-label">
+              {{item.price | currency}}
+          </div>
 
-      <select>
-         <option selected>0</option>
-         <option>1</option>
-         <option>2</option>
-         <option>3</option>
-         <option>4</option>
-         <option>5</option>
-         <option>6</option>
-         <option>7</option>
-         <option>8</option>
-         <option>9</option>
-         <option>10</option>
-      </select>
-   </label>
+          <select ng-model="item.quantities" ng-options="v for v in quantities.values"></select>
         </ion-item>
+
       </ion-list>
       <div class="spacer" style="width: 300px; height: 61px;"></div>
 
-      <button class="button button-full button-positive">
+      <button class="button button-full button-positive" on-tap="checkout()">
         Checkout
       </button>
     </ion-content>
