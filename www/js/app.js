@@ -6,6 +6,7 @@
 
 var ref='';
 var userUid='';
+var orderLists=[];
 angular.module('app', ['ionic', 'app.controllers', 'app.routes','firebase','app.service'])
 
 .run(function($ionicPlatform) {
@@ -25,5 +26,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes','firebase','app.
     }
     ref = new Firebase("https://food-delivery-app.firebaseio.com/");
 
+    
   });
 })

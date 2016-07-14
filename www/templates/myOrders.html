@@ -1,3 +1,11 @@
-<ion-view title="My Orders" id="page3" class=" ">
-    <ion-content padding="true" class="has-header"></ion-content>
+<ion-view title="My Orders">
+    <ion-content padding="true" class="has-header">
+      <ion-list>
+        <ion-item class = "item item-input item-select " ng-repeat="item in orderList">
+            <ul>
+              <li ng-repeat="i in item">{{i.item}} x {{i.quantities}}</li>
+            </ul>
+      </ion-list>
+    </ion-content>
+
 </ion-view>

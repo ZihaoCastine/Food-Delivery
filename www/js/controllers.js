@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('loginCtrl', function($scope, $state) {
+.controller('loginCtrl', function($scope, $state,getMyOrderData) {
   $scope.isLogin=false;
   $scope.auth={
     username: '',
@@ -15,13 +15,28 @@ angular.module('app.controllers', [])
 
     }, function(error, authData) {
       if (error) {
-        
+
         console.log("Login Failed!", error);
       } else {
         $state.go('tabs.menu');
         userUid=authData.uid;
         console.log(userUid);
-        console.log("Authenticated successfully with payload:", authData);
+        console.log("Authenticate dd successfully with payload:", authData);
+        var lists=getMyOrderData.myOrderLists()
+
+        lists.once('value', function(Snapshot){
+          Snapshot.forEach(function(childSnapshot) {
+            var item=childSnapshot.val();
+            var order= [];
+            for(var i in item){
+              order.push(item[i]);
+            }
+            orderLists.push(order);
+              console.log("run once");
+          });
+          console.log(orderLists);
+          console.log(orderLists[0][0]["item"]);
+        });
       }
     });
   }
@@ -45,7 +60,36 @@ angular.module('app.controllers', [])
   }
 })
 
-.controller('myOrdersCtrl', function($scope) {
+.controller('myOrdersCtrl', function($scope, getMyOrderData,$state) {
+/*
+  var ol=[];
+  var l=[];
+  var g={
+    item:"Fish"
+  }
+  l.push(g);
+  ol.push(l);
+  console.log(ol);
+  */
+  //var orderLists=[];
+  /*
+  var lists=getMyOrderData.myOrderLists()
+
+  lists.once('value', function(Snapshot){
+    Snapshot.forEach(function(childSnapshot) {
+      var item=childSnapshot.val();
+      var order= [];
+      for(var i in item){
+        order.push(item[i]);
+      }
+      orderLists.push(order);
+        console.log("run once");
+    });
+    console.log(orderLists);
+    console.log(orderLists[0][0]["item"]);
+  });
+*/
+  $scope.orderList=orderLists;
 
 })
 

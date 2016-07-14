@@ -1,10 +1,11 @@
 angular.module('app.service', [])
 
 .service('getMyOrderData', function(){
-  this.myOrders=function(){
+  this.myOrderLists=function(){
     var users=ref.child('users');
     var userLists = users.child(userUid);
-    var userOrderList= $firebaseArray(userDatabaseRef);
+    
+    return userLists;
   };
 })
 
@@ -19,13 +20,15 @@ angular.module('app.service', [])
     };
 
     for(var each in items){
-      user.child(date).push().set({
-        item: items[each].name,
-        price: items[each].price,
-        quantities: items[each].quantities
-      });
+      if(items[each].quantities!=0){
+        user.child(date).push().set({
+          item: items[each].name,
+          price: items[each].price,
+          quantities: items[each].quantities
+        });
+      }
     }
-
+    //return totalPrice;
     console.log(totalPrice);
     console.log(userUid);
 
